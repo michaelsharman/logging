@@ -14,7 +14,7 @@ The logGroup format is a simple ColdFusion structure, defined either in the cons
 
 Eg
 
-```coldfusion
+``` coldfusion
 logGroup = {
 	myLogArea = true,
 	myOtherLogArea = false,

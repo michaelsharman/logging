@@ -14,7 +14,7 @@ The logGroup format is a simple ColdFusion structure, defined either in the cons
 
 Eg
 
-```ColdFusion
+```coldfusion
 logGroup = {
 	myLogArea = true,
 	myOtherLogArea = false,
@@ -24,19 +24,19 @@ logGroup = {
 
 Pass that into Logging.cfc on instantiation so you can reference a specific group to log to:
 
-```ColdFusion
+```coldfusion
 Logging = new Logging(logGroup=logGroup),
 ```
 
 Now if you were to log a message like this:
 
-```ColdFusion
+```coldfusion
 Logging.write(text="a sample message", group="myOtherLogArea");
 ```
 
 Nothing would appear in the system log file because that group is set to _false_. However if you logged the following:
 
-```ColdFusion
+```coldfusion
 Logging.write(text="another sample message", group="myLogArea");
 ```
 
@@ -52,20 +52,20 @@ You can run a check to see how long any request took, if it took longer than a c
 
 For example in a _before_ hook you could set a start time:
 
-```ColdFusion
+```coldfusion
 rc.requestStartTime = getTickCount();
 ```
 
 Then in an _after_ hook you could call the following:
 
-```ColdFusion
+```coldfusion
 Logging.requestTime(startTime=val(rc.requestStartTime), action=rc.action, type="warning");
 ```
 That will log a warning if the request took longer than _n_ seconds (defined when you instantiate the Logging class) and do nothing if it didn't.
 
 Here is a full example for instantiation:
 
-```ColdFusion
+```coldfusion
 Logging = new Logging(logLongRequest=true, longRequestLimit=250, logGroup=logGroup),
 ```
 

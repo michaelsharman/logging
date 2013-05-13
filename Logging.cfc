@@ -120,4 +120,21 @@ component output="false"
 		return structKeyExists(variables.config.logGroup, arguments.groupKey) && variables.config.logGroup[arguments.groupKey];
 	}
 
+
+	/**
+	* @hint Returns the IP address of the user making the request. Takes into account reverse proxies and looks for `http_x_forwarded_for`
+	*/
+	private string function getUserIP()
+	{
+		var ip = cgi.remote_addr;
+
+		// Check for reverse proxy (squid etc)
+		if (structKeyExists(cgi, "http_x_forwarded_for") && len(cgi.http_x_forwarded_for))
+		{
+			ip = cgi.http_x_forwarded_for;
+		}
+
+		return ip;
+	}
+
 }
